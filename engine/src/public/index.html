@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Status Test</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 8px;
+            width: 220px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin-left: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        pre {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f4f4f4;
+            border-radius: 6px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Network Status Test</h1>
+
+    <input
+        id="ip"
+        type="text"
+        placeholder="Enter an IP address"
+    >
+
+    <button id="check">
+        Check Status
+    </button>
+
+    <pre id="output">Connecting...</pre>
+
+    <script>
+        const output = document.getElementById("output");
+
+        const socket = new WebSocket("ws://localhost:3000/network/status");
+
+        socket.onopen = () => {
+            output.textContent = "Connected to the server.";
+        };
+
+        socket.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+
+            output.textContent = JSON.stringify(data, null, 2);
+        };
+
+        socket.onerror = () => {
+            output.textContent = "WebSocket error.";
+        };
+
+        socket.onclose = () => {
+            output.textContent += "\nConnection closed.";
+        };
+
+        document.getElementById("check").addEventListener("click", () => {
+            const ip = document.getElementById("ip").value.trim();
+
+            if (!ip) {
+                alert("Please enter an IP address.");
+                return;
+            }
+
+            socket.send(JSON.stringify({ ip }));
+        });
+    </script>
+
+</body>
+</html>

@@ -1,2 +1,5 @@
 # Opensentinel
-Your own AI agent that securely manages and automates your private devices.
+
+An AI-powered agent that helps in manage devices and automates quickly.
+
+## Install (recommended)
