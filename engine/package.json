@@ -9,6 +9,7 @@
     "@elysiajs/cors": "^1.4.2",
     "bonjour-service": "^1.4.3",
     "elysia": "latest",
+    "env-paths": "^4.0.0",
     "local-devices": "^4.0.0",
     "mac-oui-lookup": "^1.1.4",
     "ping": "^1.0.0"
