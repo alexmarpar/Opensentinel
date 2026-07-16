@@ -6,7 +6,10 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
+    "@ai-sdk/google": "^4.0.17",
+    "@ai-sdk/openai": "^4.0.15",
     "@elysiajs/cors": "^1.4.2",
+    "ai": "^7.0.28",
     "bonjour-service": "^1.4.3",
     "elysia": "latest",
     "env-paths": "^4.0.0",

@@ -97,7 +97,7 @@ provider.put("/providers", async ({ body }) => {
   }, {
   
   body: t.Object({
-    provider: t.String(),
+    provider: t.String(), 
     newapikey: t.String(),
     model: t.Optional(t.String())
   })
