@@ -18,6 +18,7 @@
     "ping": "^1.0.0"
   },
   "devDependencies": {
+    "@types/ssh2": "^1.15.5",
     "bun-types": "latest"
   },
   "module": "src/index.js"

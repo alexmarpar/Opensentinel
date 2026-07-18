@@ -7,11 +7,10 @@ import { chat } from './routes/centinel/chat';
 import { initStorage } from './services/storage/init';
 import { cors } from "@elysiajs/cors";
 
-
-await initStorage();
+initStorage();
 
 const app = new Elysia()
-  .get("/", () => Bun.file("./src/public/index.html"))
+  .get("/", () => Bun.file("./src/public/sshindex.html"))
   .use(cors())
   .use(scan)
   .use(networkStatus)

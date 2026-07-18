@@ -1,5 +1,4 @@
 import { Elysia, t } from "elysia";
-import { generateText } from "ai";
 import { chat as chatFunction } from "../../ai/agent";
 
 export const chat = new Elysia();
@@ -16,16 +15,6 @@ chat.post("/chat", async ({ body, set }) => {
   body: t.Object({
     provider: t.String(),
     message: t.String(),
-    model: t.Optional(t.String())
+    model: t.String()
   })
  });
-
-
-
-
-
-
-
-
-
- 

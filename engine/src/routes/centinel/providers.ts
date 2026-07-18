@@ -17,7 +17,7 @@ provider.get("/providers", async ( {query }) => {
   const { id } = query;
   if (id) {
     try {
-    const files = await readdir(  join(PATHS.providers, id),
+    const files = await readdir(join(PATHS.providers, id),
           { withFileTypes: true });
       
     return files;

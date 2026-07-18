@@ -13,7 +13,7 @@ ssh.get("/ssh", async ( {query }) => {
   const { id } = query;
   if (id) {
     try {
-    const files = await readdir(  join(PATHS.sshDir, id),
+    const files = await readdir(join(PATHS.sshDir, id),
           { withFileTypes: true });
       
     return files;
@@ -32,7 +32,7 @@ ssh.get("/ssh", async ( {query }) => {
  
 
 ssh.post("/ssh", async ({ body, set }) => {
-  const { name, privateKey, publicKey } = body;
+  const { name, ip, port, username, password, privateKey, publicKey } = body;
   const safeName = sanitizeName(name);
   const dir = join(PATHS.sshDir, `${safeName}`);
   try {
@@ -47,10 +47,20 @@ ssh.post("/ssh", async ({ body, set }) => {
   await writeFile(join(dir, parseSSHKey(privateKey).filename), privateKey, {
     mode: 0o600
   });
+  
+  await writeFile(join(dir, parseSSHKey(publicKey).filename), publicKey);
 
-  if (publicKey) {
-    await writeFile(join(dir, parseSSHKey(publicKey).filename), publicKey);
+  const configData = {
+    host: ip,
+    port: port,
+    username: username,
+    password: password,
   }
+  await writeFile(
+      join(dir, "config.json"), 
+      JSON.stringify(configData, null, 2), 
+      "utf-8"
+    );
 
   return {
     safeName,
@@ -60,6 +70,10 @@ ssh.post("/ssh", async ({ body, set }) => {
   
   body: t.Object({
     name: t.String(),
+    ip: t.String(),
+    port: t.Number(),
+    username: t.String(),
+    password: t.Optional(t.String()),
     privateKey: t.String(),
     publicKey: t.String()
   })
