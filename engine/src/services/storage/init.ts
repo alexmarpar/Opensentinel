@@ -7,6 +7,6 @@ export async function initStorage() {
     mkdir(PATHS.dataDir, { recursive: true }),
     mkdir(PATHS.sshDir, { recursive: true }),
     mkdir(PATHS.providers, { recursive: true }),
-    mkdir(PATHS.logsDir, { recursive: true }),
+    mkdir(PATHS.sessionsDir, { recursive: true }),
   ]);
 }

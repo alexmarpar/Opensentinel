@@ -11,5 +11,5 @@ export const PATHS = {
 
   sshDir: join(paths.data, "ssh"),
   providers: join(paths.data, "providers"),
-  logsDir: join(paths.data, "logs"),
+  sessionsDir: join(paths.data, "sessions"),
 };
