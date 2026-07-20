@@ -1,7 +1,7 @@
 import envPaths from "env-paths";
 import { join } from "path";
 
-const paths = envPaths("OpenCentinel", { suffix: "" });
+const paths = envPaths("OpenSentinel", { suffix: "" });
 
 export const PATHS = {
   configDir: paths.config,

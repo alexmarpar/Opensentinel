@@ -4,6 +4,7 @@ import { networkStatus } from './routes/network/status';
 import { ssh } from './routes/ssh';
 import { provider } from './routes/centinel/providers';
 import { chat } from './routes/centinel/chat';
+import { password } from './routes/centinel/password';
 import { initStorage } from './services/storage/init';
 import { cors } from "@elysiajs/cors";
 
@@ -17,6 +18,7 @@ const app = new Elysia()
   .use(ssh)
   .use(provider)
   .use(chat)
+  .use(password)
   .listen(3000)
 
 console.log(

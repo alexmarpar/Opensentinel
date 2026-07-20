@@ -7,7 +7,6 @@ export const chat = new Elysia();
 
 chat.post("/chat", async ({ body }) => {
   let sessionId = body.sessionId;
-
   if (!sessionId) {
     const title = await generateSessionTitle(
       body.provider,
@@ -15,17 +14,16 @@ chat.post("/chat", async ({ body }) => {
     );
     const session = await createSession(title);
     sessionId = session.id;
-  } 
-  
-  const result = await chatFunction({ ...body, sessionId });
-
-  return {
-    success: true,
-    data: {
-      sessionId,
-      response: result,
-    }
-  };
+    
+    } 
+    const result = await chatFunction({ ...body, sessionId });
+    return {
+      success: true,
+      data: {
+        sessionId,
+        response: result,
+      }
+  }
 }, {
   body: t.Object({
     provider: t.String(),

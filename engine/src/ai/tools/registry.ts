@@ -1,7 +1,12 @@
 import { ToolRegistry } from "./toolRegistry";
 import { bashTool } from "./tools/bash";
-import { sshTool } from "./tools/ssh";
+import { createSshTool } from "./tools/ssh";
 
-export const registry = new ToolRegistry();
+export function createRegistryForSession(session: String) {
+  const registry = new ToolRegistry();
+  
+  registry.register("bash", bashTool);
+  registry.register("ssh", createSshTool(session));
 
-registry.register("ssh", sshTool);
+  return registry;
+}

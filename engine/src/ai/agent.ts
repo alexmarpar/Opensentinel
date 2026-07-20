@@ -1,11 +1,13 @@
 import { generateText, stepCountIs } from "ai";
 import getModel from "./model";
 import { getMessages, saveMessage } from "./storage/session";
-import { registry } from "./tools/registry";
+import { inspect } from "node:util";
+import { createRegistryForSession } from "./tools/registry";
 const SYSTEM_PROMPT = `
 You are an AI assistant.
 
 You can execute shell commands using the bash tool.
+You can execute bash commands using the bash tool.
 
 Never invent command outputs.
 
@@ -21,32 +23,29 @@ export async function chat(body: {
 {
 const model = await getModel(body.provider);
 
-const tools = registry.getTools();
+const tools = createRegistryForSession(body.sessionId).getTools();
 const history = await getMessages(body.sessionId);
 
 await saveMessage(body.sessionId, {
   role: "user",
   content: body.message,
 });
-
-const response = await generateText({
-  model,
-  system: SYSTEM_PROMPT,
-  messages: [
-    ...history,
-    {
-      role: "user",
-      content: body.message,
-    },
-  ],
-  tools,
-  stopWhen: stepCountIs(20),
-});
-
-await saveMessage(body.sessionId, {
-  role: "assistant",
-  content: response.text,
-});
-
-return response;
+  const response = await generateText({
+    model,
+    system: SYSTEM_PROMPT,
+    messages: [
+      ...history,
+      {
+        role: "user",
+        content: body.message,
+      },
+    ],
+    tools,
+    stopWhen: stepCountIs(20)
+  });
+  await saveMessage(body.sessionId, {
+    role: "assistant",
+    content: response.text,
+  });
+  return response;
 }
