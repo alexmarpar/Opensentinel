@@ -104,13 +104,12 @@ provider.put("/providers", async ({ body }) => {
  });
  
 provider.delete("/providers/:provider", async ({ params }) => {
-  const dir = join(PATHS.providers, sanitizeName(params.provider));
+  const dir = join(PATHS.providers, params.provider);
 
   await rm(dir, {
     recursive: true,
     force: true
   });
-
   return {
     success: true
   };

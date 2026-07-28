@@ -44,11 +44,15 @@ ssh.post("/ssh", async ({ body, set }) => {
   } catch {
   await mkdir(dir, { recursive: true });
 
-  await writeFile(join(dir, parseSSHKey(privateKey).filename), privateKey, {
-    mode: 0o600
-  });
-  
-  await writeFile(join(dir, parseSSHKey(publicKey).filename), publicKey);
+  if (privateKey) {
+    await writeFile(join(dir, parseSSHKey(privateKey).filename), privateKey, {
+      mode: 0o600
+    });
+  }
+
+  if (publicKey) {
+    await writeFile(join(dir, parseSSHKey(publicKey).filename), publicKey);
+  }
 
   const configData = {
     host: ip,
@@ -74,8 +78,8 @@ ssh.post("/ssh", async ({ body, set }) => {
     port: t.Number(),
     username: t.String(),
     password: t.Optional(t.String()),
-    privateKey: t.String(),
-    publicKey: t.String()
+    privateKey: t.Optional(t.String()),
+    publicKey: t.Optional(t.String())
   })
  });
 
