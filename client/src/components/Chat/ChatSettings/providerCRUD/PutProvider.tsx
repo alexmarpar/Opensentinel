@@ -66,7 +66,7 @@ function PutProvider({ setShowPutProvider }: { setShowPutProvider: (show: boolea
 
         <div>
           <label className="mb-1 block text-sm text-zinc-300">
-            Model
+            NEW Model
           </label>
           <input
             type="text"

@@ -18,11 +18,8 @@ chat.post("/chat", async ({ body }) => {
     } 
     const result = await chatFunction({ ...body, sessionId });
     return {
-      success: true,
-      data: {
-        sessionId,
-        response: result,
-      }
+      sessionId,
+      response: result.text,
   }
 }, {
   body: t.Object({

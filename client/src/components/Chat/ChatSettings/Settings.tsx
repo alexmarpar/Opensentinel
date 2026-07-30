@@ -1,9 +1,10 @@
-import ProvidersList from "../../services/ProviderGetList";
-function Settings({ setShowAddProvider, setShowPutProvider, setShowRemoveProvider, providers }: { setShowAddProvider: (show: boolean) => void; setShowPutProvider: (show: boolean) => void; setShowRemoveProvider: (show: boolean) => void; providers: string[]; setProviders: (providers: string[]) => void; }) {
+import ProvidersList from "../../../services/Chat/ProviderGetList";
 
+function Settings({ setShowAddProvider, setShowPutProvider, setShowRemoveProvider, providers, chatConfig, setChatConfig }: { setShowAddProvider: (show: boolean) => void; setShowPutProvider: (show: boolean) => void; setShowRemoveProvider: (show: boolean) => void; providers: string[]; chatConfig: ChatConfig; setChatConfig: React.Dispatch<React.SetStateAction<ChatConfig>>; }) {
+  
   return (
     <div>
-      <ProvidersList providers={providers} />
+      <ProvidersList providers={providers} chatConfig={chatConfig} setChatConfig={setChatConfig} />
 
       <h1> Choose an option:</h1>
       <div className="border-t border-zinc-700 pt-5 space-y-4">

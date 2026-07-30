@@ -17,8 +17,8 @@ export default function Topbar() {
       </div>
       <nav className="flex items-center gap-6 ml-10">
     <Link to="/">Dashboard</Link>
-    <a href="https://github.com/alexmarpar/Opensentinel.io" target="_blank" rel="noopener noreferrer">
-      Project docs
+    <a href="https://github.com/alexmarpar/Opensentinel" target="_blank" rel="noopener noreferrer">
+      Project Repository
     </a>
   </nav>  
     </header>

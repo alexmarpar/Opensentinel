@@ -14,14 +14,13 @@ interface ProviderConfig {
 }
 
 provider.get("/providers", async ( {query }) => {
-  const { id } = query;
-  if (id) {
+  const { provider } = query;
+  if (provider) {
     try {
-    const files = await readdir(join(PATHS.providers, id),
-          { withFileTypes: true });
-      
-    return files;
-
+    const configPath = join(PATHS.providers, provider, 'config.json');
+    const config = await readFile(configPath, 'utf8');
+    const { apikey, defaultModel } = JSON.parse(config);
+      return { defaultModel };
     } catch (error) {
       console.error('Error reading the directory:', error);
     }
@@ -31,7 +30,7 @@ provider.get("/providers", async ( {query }) => {
   return directories
   }, {
     query: t.Object({
-      id: t.Optional(t.String()),
+      provider: t.Optional(t.String()),
     })});
 
 provider.post("/providers", async ({ body, set }) => {
@@ -60,6 +59,8 @@ provider.post("/providers", async ({ body, set }) => {
     }
     )
       return {
+      provider,
+      model,
       safeName,
       path: dir,
     }}},{
