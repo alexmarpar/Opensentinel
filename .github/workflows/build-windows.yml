@@ -1,4 +1,4 @@
-name: Build OpenSentinel
+name: Build application
 
 on:
   workflow_dispatch:
@@ -31,16 +31,16 @@ jobs:
         working-directory: engine
         run: pnpm install --frozen-lockfile
 
-      - name: Rebuild native dependencies
-        working-directory: engine
-        run: pnpm rebuild cpu-features
-
       - name: Create binaries directory
         shell: pwsh
         run: New-Item -ItemType Directory -Force -Path src-tauri/binaries
 
       - name: Build backend
-        run: bun build ./engine/src/index.ts --compile --outfile ./src-tauri/binaries/backend-x86_64-pc-windows-msvc.exe
+        run: |
+          bun build ./engine/src/index.ts `
+            --compile `
+            --external:cpu-features `
+            --outfile ./src-tauri/binaries/backend-x86_64-pc-windows-msvc.exe
 
       - name: Check backend
         shell: pwsh
@@ -57,5 +57,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: OpenSentinel-Windows
-          path: |
-            src-tauri/target/release/bundle/
+          path: src-tauri/target/release/bundle/e/
