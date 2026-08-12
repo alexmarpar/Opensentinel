@@ -6,6 +6,11 @@
 	"dependencies": {
 		"ssh2": "^1.17.0"
 	},
+	"pnpm": {
+  "overrides": {
+    "cpu-features": "npm:@isaacs/noop"
+  		}
+	},
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
