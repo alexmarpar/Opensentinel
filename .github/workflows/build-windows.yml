@@ -40,7 +40,7 @@ jobs:
         run: |
           bun build ./engine/src/index.ts `
             --compile `
-            --external:cpu-features `
+            --external cpu-features `
             --outfile ./src-tauri/binaries/backend-x86_64-pc-windows-msvc.exe
 
       - name: Check backend
