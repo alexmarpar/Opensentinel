@@ -35,8 +35,8 @@ jobs:
           version: 10
 
       - name: Install all dependencies (recursive)
-        run: pnpm install --recursive
-        
+        run: pnpm install --recursive --no-frozen-lockfile
+
       - name: Create binaries directory
         shell: pwsh
         run: New-Item -ItemType Directory -Force -Path src-tauri/binaries
