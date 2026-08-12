@@ -24,10 +24,11 @@ jobs:
         with:
           version: 10
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - name: Create binaries directory
+        shell: pwsh
+        run: New-Item -ItemType Directory -Force -Path src-tauri/binaries
 
-      - name: Install engine dependencies
+            - name: Install engine dependencies
         working-directory: engine
         run: pnpm install --frozen-lockfile
 
