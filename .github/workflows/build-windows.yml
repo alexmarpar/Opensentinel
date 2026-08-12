@@ -34,13 +34,9 @@ jobs:
         with:
           version: 10
 
-      - name: Install root dependencies
-        run: pnpm install
-
-      - name: Install engine dependencies
-        working-directory: engine
-        run: pnpm install
-
+      - name: Install all dependencies (recursive)
+        run: pnpm install --recursive
+        
       - name: Create binaries directory
         shell: pwsh
         run: New-Item -ItemType Directory -Force -Path src-tauri/binaries
