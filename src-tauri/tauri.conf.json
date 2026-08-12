@@ -2,7 +2,7 @@
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "src-tauri",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "alexmarpar.github.io.opensentinel",
   "build": {
     "frontendDist": "../client/dist",
     "devUrl": "http://localhost:5173/",
