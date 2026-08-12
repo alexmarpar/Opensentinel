@@ -41,6 +41,9 @@ importers:
       ssh2:
         specifier: ^1.17.0
         version: 1.17.0
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@types/ssh2':
         specifier: ^1.15.5
