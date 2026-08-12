@@ -11,6 +11,9 @@ importers:
       ssh2:
         specifier: ^1.17.0
         version: 1.17.0
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@tauri-apps/cli':
         specifier: ^2.11.4
@@ -136,6 +139,9 @@ packages:
   undici-types@8.3.0:
     resolution: {integrity: sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==}
 
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
+
 snapshots:
 
   '@tauri-apps/cli-darwin-arm64@2.11.4':
@@ -230,3 +236,5 @@ snapshots:
   tweetnacl@0.14.5: {}
 
   undici-types@8.3.0: {}
+
+  zod@4.4.3: {}
