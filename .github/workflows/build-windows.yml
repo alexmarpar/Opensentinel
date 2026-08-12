@@ -1,0 +1,61 @@
+name: Build OpenSentinel
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install engine dependencies
+        working-directory: engine
+        run: pnpm install --frozen-lockfile
+
+      - name: Rebuild native dependencies
+        working-directory: engine
+        run: pnpm rebuild cpu-features
+
+      - name: Create binaries directory
+        shell: pwsh
+        run: New-Item -ItemType Directory -Force -Path src-tauri/binaries
+
+      - name: Build backend
+        run: bun build ./engine/src/index.ts --compile --outfile ./src-tauri/binaries/backend-x86_64-pc-windows-msvc.exe
+
+      - name: Check backend
+        shell: pwsh
+        run: |
+          if (!(Test-Path "./src-tauri/binaries/backend-x86_64-pc-windows-msvc.exe")) {
+            Write-Error "Backend executable was not generated."
+            exit 1
+          }
+
+      - name: Build Tauri
+        run: pnpm tauri build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenSentinel-Windows
+          path: |
+            src-tauri/target/release/bundle/

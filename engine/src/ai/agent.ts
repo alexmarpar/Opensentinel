@@ -1,13 +1,11 @@
 import { generateText, stepCountIs } from "ai";
 import getModel from "./model";
 import { getMessages, saveMessage } from "./storage/session";
-import { inspect } from "node:util";
 import { createRegistryForSession } from "./tools/registry";
 const SYSTEM_PROMPT = `
 You are an AI assistant.
 
 You can execute shell commands using the bash tool.
-You can execute bash commands using the bash tool.
 
 Never invent command outputs.
 

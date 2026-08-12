@@ -1,11 +1,19 @@
 import { useState } from "react";
 
-function AddProvider({ setShowAddProvider, reloadProviders }: { setShowAddProvider: (show: boolean) => void; reloadProviders: () => void }) {
+function AddProvider({
+  setShowAddProvider,
+  reloadProviders,
+}: {
+  setShowAddProvider: (show: boolean) => void;
+  reloadProviders: () => void;
+}) {
   const [provider, setProvider] = useState("");
   const [apikey, setApikey] = useState("");
   const [model, setModel] = useState("");
 
-  const handleSave = async () => {
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     try {
       const response = await fetch("http://localhost:3000/providers", {
         method: "POST",
@@ -22,22 +30,29 @@ function AddProvider({ setShowAddProvider, reloadProviders }: { setShowAddProvid
       if (!response.ok) {
         throw new Error("Error saving provider");
       }
+
       reloadProviders();
       console.log("Provider saved");
       setShowAddProvider(false);
     } catch (err) {
       console.error(err);
     }
-  }
+  };
+
   return (
-    <div className="rounded-lg border border-zinc-700 bg-zinc-800 p-5 shadow-xl text-white space-y-6">
-      <h2 className="flex items-center mb-4 text-xl font-semibold text-white">
+    <div className="rounded-lg border border-zinc-700 bg-zinc-800 p-5 shadow-xl text-white">
+      <h2 className="mb-4 flex items-center text-xl font-semibold">
         Add Provider
-        <button className="ml-auto h-8 w-14 min-h-0 rounded-md cursor-pointer bg-blue-600 hover:bg-blue-700" onClick={() => setShowAddProvider(false)}>
-        Close
-      </button>
+        <button
+          type="button"
+          className="ml-auto h-8 w-14 rounded-md cursor-pointer bg-blue-600 hover:bg-blue-700"
+          onClick={() => setShowAddProvider(false)}
+        >
+          Close
+        </button>
       </h2>
-      <div className="flex flex-col space-y-4">
+
+      <form onSubmit={handleSave} className="flex flex-col space-y-4">
         <div>
           <label className="mb-1 block text-sm text-zinc-300">
             Provider
@@ -57,6 +72,7 @@ function AddProvider({ setShowAddProvider, reloadProviders }: { setShowAddProvid
           </label>
           <input
             type="password"
+            autoComplete="off"
             placeholder="********"
             className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-white outline-none focus:border-blue-500"
             value={apikey}
@@ -78,15 +94,14 @@ function AddProvider({ setShowAddProvider, reloadProviders }: { setShowAddProvid
         </div>
 
         <button
-          className="w-full rounded-md bg-blue-600 py-2 font-medium text-white transition cursor-pointerhover:bg-blue-700"
-          onClick={handleSave}
+          type="submit"
+          className="w-full rounded-md bg-blue-600 py-2 font-medium text-white transition hover:bg-blue-700 cursor-pointer"
         >
           Save Provider
         </button>
-      </div>
-      
+      </form>
     </div>
-  )
+  );
 }
 
-export default AddProvider
+export default AddProvider;

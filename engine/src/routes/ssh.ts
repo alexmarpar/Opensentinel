@@ -4,25 +4,26 @@ import { join } from "path";
 import parseSSHKey from "../services/ssh/parseSHHKey";
 import sanitizeName from "../services/ssh/sanitizeName";
 import listDirectories from "../tools/listDirectories";
-import { readdir, rm, stat } from 'node:fs/promises';
+import { rm, stat } from 'node:fs/promises';
 import { PATHS } from "../services/storage/paths";
-import { renameSync } from "node:fs"
+import { renameSync } from "fs";
+import { readFile } from "node:fs/promises"
+
 export const ssh = new Elysia();
 
 ssh.get("/ssh", async ( {query }) => {
   const { id } = query;
   if (id) {
     try {
-    const files = await readdir(join(PATHS.sshDir, id),
-          { withFileTypes: true });
-      
-    return files;
+    const configPath = join(PATHS.sshDir, id, 'config.json');
+    const config = await readFile(configPath, 'utf8');
+    const configData = JSON.parse(config);
+    return configData;
 
     } catch (error) {
       console.error('Error reading the directory:', error);
     }
   }
-
   const directories = await listDirectories(PATHS.sshDir);
   return directories
   }, {
@@ -32,7 +33,7 @@ ssh.get("/ssh", async ( {query }) => {
  
 
 ssh.post("/ssh", async ({ body, set }) => {
-  const { name, ip, port, username, password, privateKey, publicKey } = body;
+  const { name, host, port, username, password, privateKey, publicKey } = body;
   const safeName = sanitizeName(name);
   const dir = join(PATHS.sshDir, `${safeName}`);
   try {
@@ -55,10 +56,11 @@ ssh.post("/ssh", async ({ body, set }) => {
   }
 
   const configData = {
-    host: ip,
+    host: host,
     port: port,
     username: username,
     password: password,
+    filekeys: !!(privateKey && publicKey)
   }
   await writeFile(
       join(dir, "config.json"), 
@@ -74,7 +76,7 @@ ssh.post("/ssh", async ({ body, set }) => {
   
   body: t.Object({
     name: t.String(),
-    ip: t.String(),
+    host: t.String(),
     port: t.Number(),
     username: t.String(),
     password: t.Optional(t.String()),
@@ -83,27 +85,6 @@ ssh.post("/ssh", async ({ body, set }) => {
   })
  });
 
-ssh.get("/ssh", async ( {query }) => {
-  const { id } = query;
-  if (id) {
-    try {
-    const files = await readdir(  join(PATHS.sshDir, id),
-          { withFileTypes: true });
-      
-    return files;
-
-    } catch (error) {
-      console.error('Error reading the directory:', error);
-    }
-  }
-
-  const directories = await listDirectories(PATHS.sshDir);
-  return directories
-  }, {
-    query: t.Object({
-      id: t.Optional(t.String()),
-    })});
-  
 ssh.put("/ssh", async ({ body }) => {
   const { id, newid,  } = body;
   
@@ -125,9 +106,8 @@ ssh.put("/ssh", async ({ body }) => {
  });
  
 
-ssh.delete("/ssh", async ({ body }) => {
-  console.log("Received request to delete directory:", body);
-  const { id } = body;
+ssh.delete("/ssh", async ({ query }) => {
+  const { id } = query;
   const dir = join(PATHS.sshDir, id); 
   try {
   await rm(dir, { recursive: true, force: true });
@@ -137,7 +117,7 @@ ssh.delete("/ssh", async ({ body }) => {
   };
 }
  }, {
-  body: t.Object({
+  query: t.Object({
     id: t.String()
   })
  });

@@ -35,3 +35,20 @@ session.get("/sessions", async ( {query }) => {
   return directories
   }}
 )
+session.delete("/sessions", async ({ query }) => {
+  const { id } = query;
+  const dir = join(PATHS.sessionsDir, id);
+  try {
+    await rm(dir, { recursive: true, force: true });
+    return {
+      message: `Directory ${id} deleted successfully.`,
+    };
+  } catch (error) {
+    console.error('Error deleting the directory:', error);
+    return { error: `Failed to delete directory ${id}.` };
+  }
+}, {
+  query: t.Object({
+    id: t.String()
+  })
+});

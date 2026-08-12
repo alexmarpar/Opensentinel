@@ -46,10 +46,10 @@ useEffect(() => {
   loadProviders();
 }, []);
     return (
-      <main className="flex h-full min-h-0 flex-col bg-gray-950 p-2 text-white">
+      <main className="flex h-full min-h-0 flex-col bg-gray-950 p-2 text-white overflow-auto">
         
         <div className="grid flex-1 min-h-0 grid-cols-12 gap-6">
-          <div className="col-span-3 min-h-0">
+          <div className="col-span-8 min-h-0">
             <Chat isSettingsOpen={isSettingsOpen} setIsSettingsOpen={setIsSettingsOpen} chatConfig={chatConfig} sessionsOpen={sessionsOpen} setSessionsOpen={setSessionsOpen} messages={messages} setMessages={setMessages} sessionId={sessionId} setSessionId={setSessionId} sessionName={sessionName} setSessionName={setSessionName} />
           </div>
           {isSettingsOpen && (

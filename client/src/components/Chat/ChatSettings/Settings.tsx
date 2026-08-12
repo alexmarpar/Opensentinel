@@ -1,5 +1,5 @@
 import ProvidersList from "../../../services/Chat/ProviderGetList";
-
+import  ChatConfig from "../classes/ChatConfig";
 function Settings({ setShowAddProvider, setShowPutProvider, setShowRemoveProvider, providers, chatConfig, setChatConfig }: { setShowAddProvider: (show: boolean) => void; setShowPutProvider: (show: boolean) => void; setShowRemoveProvider: (show: boolean) => void; providers: string[]; chatConfig: ChatConfig; setChatConfig: React.Dispatch<React.SetStateAction<ChatConfig>>; }) {
   
   return (
