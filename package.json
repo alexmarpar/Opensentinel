@@ -1,15 +1,14 @@
 {
 	"devDependencies": {
-		"@tauri-apps/cli": "^2.11.4",
 		"@types/bun": "^1.3.14"
 	},
 	"dependencies": {
 		"ssh2": "^1.17.0"
 	},
 	"scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "build:backend": "bun build backend/index.ts --compile --outfile src-tauri/binaries/backend-x86_64-pc-windows-msvc.exe",
-    "tauri": "tauri"
-  }
+		"dev": "vite",
+		"build": "vite build",
+		"build:backend": "bun build backend/index.ts --compile --outfile src-tauri/binaries/backend-x86_64-pc-windows-msvc.exe",
+		"tauri": "tauri"
+	}
 }

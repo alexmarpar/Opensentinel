@@ -1,0 +1,2 @@
+allowBuilds:
+  ssh2: true
