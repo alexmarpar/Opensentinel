@@ -5,8 +5,8 @@ export async function generateSessionTitle(
   provider: string,
   message: string
 ) {
-  const model = await getModel(provider);
 
+  const model = await getModel(provider);
   const { text } = await generateText({
     model,
     system: `

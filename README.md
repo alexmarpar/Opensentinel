@@ -33,3 +33,5 @@ Execute
 docker compose up -d
 ```
 After that, enter in [http://localhost:4173](http://localhost:4173/)
+
+Important note: Docker support doesn't have persistence of ssh devices, sessions and providers. This will be corrected in later versions! and this note will be removed. 

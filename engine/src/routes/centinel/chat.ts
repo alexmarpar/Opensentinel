@@ -14,7 +14,6 @@ chat.post("/chat", async ({ body }) => {
     );
     const session = await createSession(title);
     sessionId = session.id;
-    
     } 
     const result = await chatFunction({ ...body, sessionId });
     return {
