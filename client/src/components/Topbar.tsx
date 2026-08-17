@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import logo from "/src/assets/icon.svg";
+import icon from "../assets/icon.svg";
 
 export default function Topbar() {
   return (
     <header className="h-16 bg-gray-950 border-b border-gray-800 flex items-center text-white">
        <div className="flex items-center gap-3 justify-between px-6">
         <img
-          src={logo}
-          alt="Logo"
+          src={icon}
+          alt="Icon"
           className="w-9 h-9 bg-white rounded-full p-1"
         />
 

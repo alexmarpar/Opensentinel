@@ -1,0 +1,20 @@
+services:
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: OpenSentinel-frontend
+    ports:
+      - "4173:4173"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./engine
+      dockerfile: Dockerfile
+    container_name: OpenSentinel-backend
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
