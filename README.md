@@ -22,6 +22,15 @@ bun dev
 ```
 Now you can enter in [http://localhost:5173](http://localhost:5173) and start manage your remote machine with the agent.
 
+Actual AI providers avaliable: 
+```
+openrouter
+ollama
+openai
+googleaistudio
+```
+You can configure your API keys in these providers.
+
 ## Docker support
 <p align="center">
   <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/34c22501f9ac9f22b12f825677ccbab1fb22e14b/icons/docker.svg" alt="Docker image" width="150">
