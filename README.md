@@ -22,6 +22,9 @@ bun dev
 ```
 Now you can enter in [http://localhost:5173](http://localhost:5173) and start manage your remote machine with the agent.
 
+Note: You have to set in your message the password of the user.
+``The password is x``
+
 Actual AI providers avaliable: 
 ```
 openrouter
