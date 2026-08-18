@@ -18,3 +18,8 @@ services:
     ports:
       - "3000:3000"
     restart: unless-stopped
+    volumes:
+      - app-data:/root/.local/share/OpenSentinel
+      
+volumes:
+      app-data:
