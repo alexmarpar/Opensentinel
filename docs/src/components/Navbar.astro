@@ -7,6 +7,7 @@ export const description =
 export const githubUrl = 'https://github.com/alexmarpar/opensentinel';
 
 const baseUrl = import.meta.env.BASE_URL;
+
 ---
 
 <header
@@ -42,7 +43,7 @@ const baseUrl = import.meta.env.BASE_URL;
 				</a>
 
 				<a
-					href="/docs"
+					href={ `${baseUrl}docs` }
 					class="text-sm text-neutral-500 transition-colors hover:text-white"
 				>
 					Docs

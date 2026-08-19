@@ -7,7 +7,7 @@ import starlight from '@astrojs/starlight';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://alexmarpar.github.io',
-  base: '/Opensentinel/',
+  base: '/Opensentinel',
   vite: {
     plugins: [tailwindcss()]
   },
