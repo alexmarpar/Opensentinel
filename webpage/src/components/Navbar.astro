@@ -1,0 +1,58 @@
+---
+export const projectName = 'OpenSentinel';
+
+export const description =
+	'A modern, open-source, SSH agent and bastion host for secure remote access to your servers.';
+
+export const githubUrl = 'https://github.com/alexmarpar/opensentinel';
+---
+
+<header
+			class="mx-auto flex h-[72px] w-[calc(100%-40px)] max-w-[1100px] items-center justify-between border-b border-white/[0.08]"
+		>
+			<a
+				href="/"
+				class="flex items-center gap-2.5 font-semibold text-white no-underline"
+			>
+				<span
+					class="grid size-[30px] place-items-center rounded-lg bg-white text-[15px] text-black"
+					aria-hidden="true"
+				>
+					<img src="/favicon.svg" alt="OpenSentinel Logo" />
+				</span>
+
+				<span>{projectName}</span>
+			</a>
+
+			<nav class="hidden items-center gap-7 sm:flex" aria-label="Main navigation">
+				<a
+					href="#features"
+					class="text-sm text-neutral-500 transition-colors hover:text-white"
+				>
+					Features
+				</a>
+
+				<a
+					href="#quick-start"
+					class="text-sm text-neutral-500 transition-colors hover:text-white"
+				>
+					Quick Start
+				</a>
+
+				<a
+					href="/docs"
+					class="text-sm text-neutral-500 transition-colors hover:text-white"
+				>
+					Docs
+				</a>
+
+				<a
+					href={githubUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-sm text-neutral-500 transition-colors hover:text-white"
+				>
+					GitHub ↗
+				</a>
+			</nav>
+		</header>

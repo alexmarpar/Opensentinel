@@ -1,0 +1,235 @@
+astro
+
+---
+import "tailwindcss";
+import Navbar from './Navbar.astro';
+
+import { projectName, description, githubUrl } from './Navbar.astro';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta name="description" content={description} />
+
+		<title>{projectName}</title>
+	</head>
+
+	<body class="m-0 min-h-screen bg-[#080808] font-sans text-white antialiased">
+
+		<div
+			class="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_15%,rgba(255,255,255,0.09),transparent_30%),radial-gradient(circle_at_15%_50%,rgba(120,80,255,0.08),transparent_25%)]"
+		></div>
+
+		<Navbar></Navbar>
+
+		<main>
+		<div class="bg-[url('../assets/background.jpg')] bg-cover bg-center">
+			<section class="mx-auto max-w-[850px] px-5 pb-24 pt-36 text-center sm:pt-40">
+				<div
+					class="animate-pulse inline-flex items-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.04] px-3 py-1.5 text-[13px] text-neutral-400"
+				>
+					<span
+						class="size-1.5 rounded-full bg-green-400 shadow-[0_0_12px_#66d48a]"
+						aria-hidden="true"
+					></span>
+
+					Open source · Runs anywhere
+				</div>
+
+				<h1
+					class="animate-pulse text-6xl font-bold mt-7 text-[clamp(48px,8vw,86px)] font-bold leading-[0.98] tracking-[-0.055em]"
+				>
+					Manage your remote devices without
+					<span class="block text-neutral-500">
+						installing anything.
+					</span>
+				</h1>
+
+				<p
+					class="mx-auto mt-6 max-w-[620px] text-[19px] leading-relaxed text-neutral-400"
+				>
+					{description}
+				</p>
+
+				<div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+					<a
+						href="/docs"
+						class="inline-flex items-center justify-center gap-2.5 rounded-[10px] bg-white px-[18px] py-[13px] text-sm font-semibold text-black transition hover:-translate-y-0.5"
+					>
+						Get started
+						<span aria-hidden="true">→</span>
+					</a>
+
+					<a
+						href={githubUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex items-center justify-center gap-2.5 rounded-[10px] border border-white/[0.15] bg-white/[0.04] px-[18px] py-[13px] text-sm font-semibold text-white transition hover:-translate-y-0.5"
+					>
+						View on GitHub
+						<span aria-hidden="true">↗</span>
+					</a>
+				</div>
+
+				<p class="mt-[18px] text-xs text-neutral-600">
+					Free and open source. No account required.
+				</p>
+			</section>
+
+			<section
+				id="quick-start"
+				class="transition-transform duration-300 hover:scale-110 mx-auto mb-36 w-[calc(100%-40px)] max-w-[850px] overflow-hidden rounded-[14px] border border-neutral-800 bg-[#0d0d0d] shadow-[0_30px_80px_rgba(0,0,0,0.4)]"
+			>
+				<div
+					class="flex h-[42px] items-center gap-[15px] border-b border-neutral-800 px-[15px] text-xs text-neutral-500"
+				>
+					<div class="flex gap-1.5" aria-hidden="true">
+						<span class="size-[9px] rounded-full bg-neutral-700"></span>
+						<span class="size-[9px] rounded-full bg-neutral-700"></span>
+						<span class="size-[9px] rounded-full bg-neutral-700"></span>
+					</div>
+
+					<span>Quick Start (docker)</span>
+				</div>
+
+				<div
+					class="space-y-1 overflow-x-auto p-6 font-mono text-[13px] leading-8 text-neutral-400"
+				>
+					<div>
+						<span class="mr-2 text-neutral-600">$</span>
+						git clone {githubUrl}.git
+					</div>
+
+					<div>
+						<span class="mr-2 text-neutral-600">$</span>
+						cd opensentinel
+					</div>
+
+					<div>
+						<span class="mr-2 text-neutral-600">$</span>
+						docker compose up -d
+					</div>
+
+					<div class="mt-2 text-green-400">
+						✓ Ready on http://localhost:4173
+					</div>
+				</div>
+			</section>
+
+			<!-- Features -->
+			<section
+				id="features"
+				class="mx-auto w-[calc(100%-40px)] max-w-[1100px] pb-36"
+			>
+				<div>
+					<span class="text-[11px] tracking-[0.15em] text-neutral-500">
+						WHY {projectName.toUpperCase()}
+					</span>
+
+					<h2
+						class="mb-[45px] mt-[15px] text-[clamp(35px,5vw,55px)] font-semibold leading-none tracking-[-0.04em]"
+					> Request AI consultations for your remote devices.
+						<br />
+						All in a single, secure interface.
+					</h2>
+				</div>
+
+				<div class="grid grid-cols-1 border-y border-neutral-800 md:grid-cols-3">
+					<article
+						class="border-b border-neutral-800 p-9 md:border-b-0 md:border-r"
+					>
+						<div class="mb-6 text-2xl" aria-hidden="true">⚡</div>
+
+						<h3 class="mb-2 text-lg font-semibold">
+							Fast
+						</h3>
+
+						<p class="text-sm leading-7 text-neutral-500">
+							Designed to be lightweight and fast, without unnecessary
+							complexity.
+						</p>
+					</article>
+
+					<article
+						class="border-b border-neutral-800 p-9 md:border-b-0 md:border-r"
+					>
+						<div class="mb-6 text-2xl" aria-hidden="true">◈</div>
+
+						<h3 class="mb-2 text-lg font-semibold">
+							Open source
+						</h3>
+
+						<p class="text-sm leading-7 text-neutral-500">
+							Your code, your infrastructure and your control. Completely open.
+						</p>
+					</article>
+
+					<article class="p-9">
+						<div class="mb-6 text-2xl" aria-hidden="true">⌘</div>
+
+						<h3 class="mb-2 text-lg font-semibold">
+							Hackable
+						</h3>
+
+						<p class="text-sm leading-7 text-neutral-500">
+							Customize it, extend it and make it work exactly the way you want.
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<!-- CTA -->
+			<section
+				class="mx-auto mb-36 w-[calc(100%-40px)] max-w-[700px] border-y border-neutral-800 px-5 py-20 text-center"
+			>
+				<p class="text-sm text-neutral-500">
+					Ready to get started?
+				</p>
+
+				<h2
+					class="mb-8 mt-2.5 text-[clamp(40px,6vw,65px)] font-semibold leading-none tracking-[-0.05em]"
+				>
+					Start using {projectName} in minutes.
+				</h2>
+
+				<a
+					href="/docs"
+					class="inline-flex items-center gap-2.5 rounded-[10px] bg-white px-[18px] py-[13px] text-sm font-semibold text-black transition hover:-translate-y-0.5"
+				>
+					Read the documentation
+					<span aria-hidden="true">→</span>
+				</a>
+			</section>
+			</div>
+		</main>
+
+		<footer
+			class="mx-auto flex w-[calc(100%-40px)] max-w-[1100px] flex-col justify-between gap-5 pb-12 text-[13px] text-neutral-600 sm:flex-row"
+		>
+			<div class="flex gap-2.5">
+				<strong class="text-neutral-400">{projectName}</strong>
+				<span>Open source software</span>
+			</div>
+
+			<div class="flex gap-5">
+				<a>
+					Open Source MIT License
+				</a>
+				<a href="/docs" class="transition-colors hover:text-white">
+					Documentation
+				</a>
+				<a
+					href={githubUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="transition-colors hover:text-white"
+				>
+					GitHub
+				</a>
+			</div>
+		</footer>
+	</body>
+</html>
