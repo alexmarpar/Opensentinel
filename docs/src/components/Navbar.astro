@@ -5,6 +5,8 @@ export const description =
 	'A modern, open-source, SSH agent and bastion host for secure remote access to your servers.';
 
 export const githubUrl = 'https://github.com/alexmarpar/opensentinel';
+
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <header
@@ -18,7 +20,7 @@ export const githubUrl = 'https://github.com/alexmarpar/opensentinel';
 					class="grid size-[30px] place-items-center rounded-lg bg-white text-[15px] text-black"
 					aria-hidden="true"
 				>
-					<img src={`${import.meta.env.BASE_URL}favicon.svg`} alt="OpenSentinel Logo" />
+					<img src={`${baseUrl}favicon.svg`} alt="OpenSentinel Logo" />
 				</span>
 
 				<span>{projectName}</span>
