@@ -1,12 +1,17 @@
 import { tool } from "ai";
 import { z } from "zod";
-import { PATHS } from "../../../services/storage/paths";
-import { join } from "node:path";
-import { readdir } from "node:fs/promises";
 import { getConnection } from "../../../services/ssh/getConnection";
 import { executeSSH } from "../../../services/ssh/executeSSH";
 
 export const sshMemory = new Map();
+
+export function clearSessionCredentials(sessionId: string) {
+  for (const key of sshMemory.keys()) {
+    if (key.startsWith(`${sessionId}:`)) {
+      sshMemory.delete(key);
+    }
+  }
+}
 
 export function createSshTool(session: any) {
   return tool({
@@ -33,8 +38,6 @@ export function createSshTool(session: any) {
 
   execute: async ({ connection, command, timeout }) => {
     const config = await getConnection(connection);
-    await readdir(join(PATHS.sshDir, connection),
-              { withFileTypes: true });
     const cacheKey = `${session}:${connection}`;
     const creds = sshMemory.get(cacheKey);
     if (!config.password && !creds?.password) {
