@@ -12,6 +12,23 @@ export default function ProvidersList({
   chatConfig: ChatConfig;
   setChatConfig: React.Dispatch<React.SetStateAction<ChatConfig>>;
 }) {
+  const handleSelect = async (provider: string) => {
+    try {
+      const res = await fetch(`http://localhost:3000/providers?provider=${encodeURIComponent(provider)}`);
+      if (res.ok) {
+        const data = await res.json();
+        setChatConfig({
+          provider,
+          model: data.defaultModel || "",
+        });
+      } else {
+        setChatConfig((prev) => ({ ...prev, provider }));
+      }
+    } catch {
+      setChatConfig((prev) => ({ ...prev, provider }));
+    }
+  };
+
   return (
     <div>
       <h3 className="mb-2 text-sm font-semibold text-zinc-300">
@@ -37,12 +54,7 @@ export default function ProvidersList({
               </div>
 
               <button
-                onClick={() =>
-                  setChatConfig((prev) => ({
-                    ...prev,
-                    provider,
-                  }))
-                }
+                onClick={() => handleSelect(provider)}
                 className={`px-3 py-1 rounded-md text-sm transition ${
                   selected
                     ? "bg-blue-600 text-white"

@@ -1,7 +1,5 @@
-
-
 async function PutDevice(id: string, newid: string) {
-  const res = await fetch(`http://localhost:3000/ssh?id=${id}&newid=${newid}`, {
+  const res = await fetch("http://localhost:3000/ssh", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

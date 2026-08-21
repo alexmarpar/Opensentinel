@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 
 function PutProvider({
   setShowPutProvider,
+  reloadProviders,
 }: {
   setShowPutProvider: (show: boolean) => void;
+  reloadProviders: () => void;
 }) {
   const [provider, setProvider] = useState("");
   const [newapikey, setApikey] = useState("");
@@ -31,6 +33,7 @@ function PutProvider({
 
       console.log("Provider saved");
       setShowPutProvider(false);
+      reloadProviders();
     } catch (err) {
       console.error(err);
     }
@@ -57,7 +60,7 @@ function PutProvider({
           <input
             type="text"
             autoComplete="username"
-            placeholder="ex: openai, ollama"
+            placeholder="ex: opencodezen, openai, ollama"
             className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-white outline-none focus:border-blue-500"
             value={provider}
             onChange={(e) => setProvider(e.target.value)}

@@ -1,7 +1,7 @@
 import Header from './components/Header'
 import Messages from './components/Messages';
 import Input from './components/Input';
-import ChatConfig from './classes/ChatConfig';
+import type ChatConfig from './classes/ChatConfig';
 import { useState, type Dispatch, type SetStateAction } from 'react';
 import { type Message } from './classes/Messages';
 

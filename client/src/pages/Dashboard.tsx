@@ -69,7 +69,7 @@ useEffect(() => {
           )}
           {showPutProvider && isSettingsOpen && (
             <div className="col-span-3 min-h-0">
-              <PutProvider setShowPutProvider={setShowPutProvider} />
+              <PutProvider setShowPutProvider={setShowPutProvider} reloadProviders={loadProviders} />
             </div>
           )}
           {showRemoveProvider && isSettingsOpen && (
