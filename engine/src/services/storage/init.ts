@@ -1,4 +1,4 @@
-import { mkdir } from "fs/promises";
+import { mkdir } from "node:fs/promises";
 import { PATHS } from "./paths";
 
 export async function initStorage() {

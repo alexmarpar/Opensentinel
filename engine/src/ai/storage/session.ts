@@ -1,9 +1,8 @@
-import { join } from "path";
+import { join } from "node:path";
 import { readFile } from "node:fs/promises";
 import type { ModelMessage } from "ai";
-import { mkdir, writeFile } from "fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { PATHS } from "../../services/storage/paths";
-import { password } from "bun";
 
 export async function createSession(title : string) {
     const id = crypto.randomUUID();
@@ -61,8 +60,27 @@ export async function saveMessage(
   await writeFile(file, JSON.stringify(messages, null, 2), "utf-8");
 }
 
-export async function listSessions() {}
+export async function listSessions(): Promise<string[]> {
+  const { readdir } = await import("node:fs/promises");
+  try {
+    const dirs = await readdir(PATHS.sessionsDir);
+    return dirs;
+  } catch {
+    return [];
+  }
+}
 
-export async function renameSession() {}
+export async function renameSession(sessionId: string, newTitle: string): Promise<void> {
+  const sessionPath = join(PATHS.sessionsDir, sessionId, "session.json");
+  const raw = await readFile(sessionPath, "utf-8");
+  const session = JSON.parse(raw);
+  session.title = newTitle;
+  session.updatedAt = new Date().toISOString();
+  await writeFile(sessionPath, JSON.stringify(session, null, 2), "utf-8");
+}
 
-export async function deleteSession() {}
+export async function deleteSession(sessionId: string): Promise<void> {
+  const { rm } = await import("node:fs/promises");
+  const sessionDir = join(PATHS.sessionsDir, sessionId);
+  await rm(sessionDir, { recursive: true, force: true });
+}

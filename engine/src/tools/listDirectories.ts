@@ -1,4 +1,4 @@
-import { readdir } from 'fs/promises';
+import { readdir } from 'node:fs/promises';
 
 export default async function listDirectories(targetPath: string) {
   try {
@@ -8,7 +8,7 @@ export default async function listDirectories(targetPath: string) {
       .filter(item => item.isDirectory())
       .map(item => item.name);
 
-      return  JSON.stringify(directories);
+      return directories;
 
   } catch (error) {
     if (error instanceof Error) {

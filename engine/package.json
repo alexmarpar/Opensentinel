@@ -7,9 +7,12 @@
     "start": "bun run src/index.ts"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^1.0.0",
     "@ai-sdk/google": "^4.0.17",
     "@ai-sdk/openai": "^4.0.16",
+    "@ai-sdk/openai-compatible": "^0.2.0",
     "@elysiajs/cors": "^1.4.2",
+    "@openrouter/ai-sdk-provider": "^0.1.0",
     "ai": "^7.0.28",
     "bonjour-service": "^1.4.3",
     "elysia": "latest",

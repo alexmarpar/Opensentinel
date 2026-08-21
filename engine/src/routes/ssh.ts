@@ -1,21 +1,24 @@
 import { Elysia, t } from "elysia";
-import { mkdir, writeFile } from "fs/promises";
-import { join } from "path";
-import parseSSHKey from "../services/ssh/parseSHHKey";
+import { mkdir, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import parseSSHKey from "../services/ssh/parseSSHKey";
 import sanitizeName from "../services/ssh/sanitizeName";
 import listDirectories from "../tools/listDirectories";
-import { rm, stat } from 'node:fs/promises';
+import { rm, stat, rename } from 'node:fs/promises';
 import { PATHS } from "../services/storage/paths";
-import { renameSync } from "fs";
 import { readFile } from "node:fs/promises"
+import { isPathSafe } from "../services/storage/pathValidation";
 
 export const ssh = new Elysia();
 
 ssh.get("/ssh", async ( {query }) => {
   const { id } = query;
   if (id) {
-    try {
     const configPath = join(PATHS.sshDir, id, 'config.json');
+    if (!isPathSafe(PATHS.sshDir, join(PATHS.sshDir, id))) {
+      return { error: "Invalid SSH ID" };
+    }
+    try {
     const config = await readFile(configPath, 'utf8');
     const configData = JSON.parse(config);
     return configData;
@@ -30,7 +33,7 @@ ssh.get("/ssh", async ( {query }) => {
     query: t.Object({
       id: t.Optional(t.String()),
     })});
- 
+
 
 ssh.post("/ssh", async ({ body, set }) => {
   const { name, host, port, username, password, privateKey, publicKey } = body;
@@ -63,17 +66,19 @@ ssh.post("/ssh", async ({ body, set }) => {
     filekeys: !!(privateKey && publicKey)
   }
   await writeFile(
-      join(dir, "config.json"), 
-      JSON.stringify(configData, null, 2), 
-      "utf-8"
+      join(dir, "config.json"),
+      JSON.stringify(configData, null, 2),
+      {
+        mode: 0o600,
+      }
     );
 
   return {
     safeName,
     path: dir,
   };
-  }}, {
-  
+  }},
+
   body: t.Object({
     name: t.String(),
     host: t.String(),
@@ -86,29 +91,36 @@ ssh.post("/ssh", async ({ body, set }) => {
  });
 
 ssh.put("/ssh", async ({ body }) => {
-  const { id, newid,  } = body;
-  
+  const { id, newid } = body;
+
   const oldDir = join(PATHS.sshDir, id);
   const newDir = join(PATHS.sshDir, sanitizeName(newid));
 
-  await renameSync(oldDir, newDir);
+  if (!isPathSafe(PATHS.sshDir, oldDir) || !isPathSafe(PATHS.sshDir, newDir)) {
+    return { error: "Invalid SSH ID" };
+  }
+
+  await rename(oldDir, newDir);
 
   return {
     id,
     path: newDir,
   };
   }, {
-  
+
   body: t.Object({
     id: t.String(),
     newid: t.String()
   })
  });
- 
+
 
 ssh.delete("/ssh", async ({ query }) => {
   const { id } = query;
-  const dir = join(PATHS.sshDir, id); 
+  const dir = join(PATHS.sshDir, id);
+  if (!isPathSafe(PATHS.sshDir, dir)) {
+    return { error: "Invalid SSH ID" };
+  }
   try {
   await rm(dir, { recursive: true, force: true });
 } catch (error) {
