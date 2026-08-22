@@ -4,6 +4,8 @@
 </p>
 
 An AI-powered agent that helps in manage devices and automates quickly via SSH.
+
+Supports OpenCode Zen (50+ models with free tier), OpenAI, Ollama, Google AI Studio, and OpenRouter. Features session management, SSH device discovery, and optional API key authentication
 ## Requirements
 * [pnpm](https://pnpm.io/installation) 
 * [bun](https://bun.com/docs/installation)
