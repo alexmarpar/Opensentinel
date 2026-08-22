@@ -1,5 +1,4 @@
-
-function DeleteSession(sessionId: string) {
+function deleteSession(sessionId: string) {
   return fetch(`http://localhost:3000/sessions?id=${sessionId}`, {
     method: "DELETE",
   }).then((response) => {
@@ -8,4 +7,5 @@ function DeleteSession(sessionId: string) {
     }
   });
 }
-  export default DeleteSession
+
+export default deleteSession;

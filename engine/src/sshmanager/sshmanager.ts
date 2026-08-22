@@ -1,6 +1,6 @@
 import { Client, ClientChannel, ConnectConfig } from "ssh2";
 import { PATHS } from "../services/storage/paths";
-import { join } from "path";
+import { join } from "node:path";
 import { readFile } from "node:fs/promises";
 import { sshMemory } from "../ai/tools/tools/ssh";
 

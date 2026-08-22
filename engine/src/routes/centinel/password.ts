@@ -9,12 +9,10 @@ password.post("/password", async ({ body }) => {
   const cacheKey = `${sessionId}:${connection}`;
   sshMemory.set(cacheKey, { password });
 
-  const result = { ...body, sessionId };
   return {
     success: true,
     data: {
       sessionId,
-      response: result,
     }
   };
 }, {

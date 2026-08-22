@@ -2,8 +2,8 @@ import { Elysia, t } from "elysia";
 import { PATHS } from "../../services/storage/paths";
 import { readdir, rm, stat } from 'node:fs/promises';
 import listDirectories from "../../tools/listDirectories";
-import { mkdir, readFile, writeFile } from "fs/promises";
-import { join } from "path";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 import sanitizeName from "../../services/ssh/sanitizeName";
 
 export const provider = new Elysia();

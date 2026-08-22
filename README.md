@@ -41,9 +41,27 @@ Note: You have to set in your message the password of the user.
 
 Actual AI providers avaliable: 
 ```
+opencodezen
 openrouter
 ollama
 openai
 googleaistudio
 ```
 You can configure your API keys in these providers.
+
+### OpenCode Zen (Recommended)
+
+[OpenCode Zen](https://opencode.ai/zen) provides a curated list of tested and verified AI models. Free models available include MiMo-V2.5 Free, Hy3 Free, Nemotron 3 Ultra Free, and more.
+
+To use OpenCode Zen:
+1. Sign up at [opencode.ai/auth](https://opencode.ai/auth) and get your API key
+2. Add a new provider with name `opencodezen`
+3. Use any model ID from the [supported models](https://opencode.ai/docs/zen/#endpoints), e.g. `gpt-5.5`, `claude-sonnet-5`, `gemini-3.5-flash`, `mimo-v2.5-free`
+
+### Authentication
+
+Optionally, you can protect your API with an API key:
+```bash
+export OPENSENTINEL_API_KEY=your-secret-key
+```
+Then include the header `Authorization: Bearer your-secret-key` in all requests.

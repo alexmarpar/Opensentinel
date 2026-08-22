@@ -2,6 +2,7 @@ import { generateText, stepCountIs } from "ai";
 import getModel from "./model";
 import { getMessages, saveMessage } from "./storage/session";
 import { createRegistryForSession } from "./tools/registry";
+import { clearSessionCredentials } from "./tools/tools/ssh";
 const SYSTEM_PROMPT = `
 You are an AI assistant.
 
@@ -45,5 +46,6 @@ await saveMessage(body.sessionId, {
     role: "assistant",
     content: response.text,
   });
+  clearSessionCredentials(body.sessionId);
   return response;
 }

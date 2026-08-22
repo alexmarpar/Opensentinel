@@ -59,7 +59,7 @@ function AddProvider({
           </label>
           <input
             type="text"
-            placeholder="ex: openai, ollama"
+            placeholder="ex: opencodezen, openai, ollama"
             className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-2 text-white outline-none focus:border-blue-500"
             value={provider}
             onChange={(e) => setProvider(e.target.value)}

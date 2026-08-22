@@ -3,7 +3,7 @@ import { bashTool } from "./tools/bash";
 import { createSaveSSHCredentialsTool } from "./tools/saveSSHCredentials";
 import { createSshTool } from "./tools/ssh";
 
-export function createRegistryForSession(session: String) {
+export function createRegistryForSession(session: string) {
   const registry = new ToolRegistry();
   
   registry.register("ssh", createSshTool(session));
