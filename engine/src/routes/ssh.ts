@@ -77,7 +77,7 @@ ssh.post("/ssh", async ({ body, set }) => {
     safeName,
     path: dir,
   };
-  }},
+  }}, {
 
   body: t.Object({
     name: t.String(),
