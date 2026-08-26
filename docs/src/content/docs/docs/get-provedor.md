@@ -16,7 +16,10 @@ description: Get AI providers
 
 * OpenCode Zen (Recommended)
 * 
-[OpenCode](https://opencode.ai/zen) Zen provides a curated list of tested and verified AI models. Free models available include MiMo-V2.5 Free, Hy3 Free, Nemotron 3 Ultra Free, and more.
+[OpenCode](https://opencode.ai/zen)
+
+Zen provides a curated list of tested and verified AI models. Free models available include MiMo-V2.5 Free, Hy3 Free, Nemotron 3 Ultra Free, and more.
+
 
 Make sure you write the name exactly as you see in provider
 ### 2. Get your API key in these avaliable providers.
