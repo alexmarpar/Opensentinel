@@ -5,57 +5,62 @@ export const description =
 	'A modern, open-source, SSH agent and bastion host for secure remote access to your servers.';
 
 export const githubUrl = 'https://github.com/alexmarpar/opensentinel';
-
-const baseUrl = import.meta.env.BASE_URL;
-
 ---
 
-<header
-			class="mx-auto flex h-[72px] w-[calc(100%-40px)] max-w-[1100px] items-center justify-between border-b border-white/[0.08]"
+<header class="mx-auto flex h-[72px] w-[calc(100%-32px)] max-w-[1100px] items-center justify-between border-b border-white/[0.08]">
+	<a
+		href="/"
+		class="group flex items-center gap-3 font-semibold text-white no-underline"
+		aria-label={`${projectName} home`}
+	>
+		<span
+			class="grid size-8 shrink-0 place-items-center overflow-hidden rounded-lg bg-white transition-transform duration-200 group-hover:scale-105"
+			aria-hidden="true"
 		>
-			<a
-				href="/"
-				class="flex items-center gap-2.5 font-semibold text-white no-underline"
-			>
-				<span
-					class="grid size-[30px] place-items-center rounded-lg bg-white text-[15px] text-black"
-					aria-hidden="true"
-				>
-					<img src={`${baseUrl}/favicon.svg`} alt="OpenSentinel Logo" />
-				</span>
+			<img
+				src="/favicon.svg"
+				alt=""
+				class="size-5 object-contain"
+			/>
+		</span>
 
-				<span>{projectName}</span>
-			</a>
+		<span class="text-[15px] tracking-[-0.01em]">
+			{projectName}
+		</span>
+	</a>
 
-			<nav class="hidden items-center gap-7 sm:flex" aria-label="Main navigation">
-				<a
-					href="#features"
-					class="text-sm text-neutral-500 transition-colors hover:text-white"
-				>
-					Features
-				</a>
+	<nav
+		class="hidden items-center gap-7 sm:flex"
+		aria-label="Main navigation"
+	>
+		<a
+			href="#features"
+			class="text-sm text-neutral-400 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+		>
+			Features
+		</a>
 
-				<a
-					href="#quick-start"
-					class="text-sm text-neutral-500 transition-colors hover:text-white"
-				>
-					Quick Start
-				</a>
+		<a
+			href="#quick-start"
+			class="text-sm text-neutral-400 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+		>
+			Quick Start
+		</a>
 
-				<a
-					href={ `${baseUrl}/docs` }
-					class="text-sm text-neutral-500 transition-colors hover:text-white"
-				>
-					Docs
-				</a>
+		<a
+			href="/docs"
+			class="text-sm text-neutral-400 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+		>
+			Docs
+		</a>
 
-				<a
-					href={githubUrl}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="text-sm text-neutral-500 transition-colors hover:text-white"
-				>
-					GitHub ↗
-				</a>
-			</nav>
-		</header>
+		<a
+			href={githubUrl}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="text-sm text-neutral-400 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
+		>
+			GitHub <span aria-hidden="true">↗</span>
+		</a>
+	</nav>
+</header>
