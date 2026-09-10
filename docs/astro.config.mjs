@@ -12,9 +12,4 @@ export default defineConfig({
   },
   site: 'https://alexmarpar.github.io',
 	base: '/Opensentinel',
-  integrations: [
-    starlight({
-      title: 'OpenSentinel',
-    }),
-  ],
 });

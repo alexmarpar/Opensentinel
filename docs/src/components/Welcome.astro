@@ -2,6 +2,7 @@
 import Navbar from './Navbar.astro';
 import { projectName, description, githubUrl } from './Navbar.astro';
 const base = import.meta.env.BASE_URL;
+import background from '../assets/background.jpg';
 ---
 
 <html lang="en">
@@ -23,7 +24,10 @@ const base = import.meta.env.BASE_URL;
 		<Navbar />
 
 		<main>
-			<div class="bg-[url('../assets/background.jpg')] bg-cover bg-center">
+			<div
+				class="bg-cover bg-center bg-no-repeat"
+				style={`background-image: url(${background.src})`}
+			>
 				<section class="mx-auto max-w-[850px] px-5 pb-24 pt-36 text-center sm:pt-40">
 					<div
 						class="animate-pulse inline-flex items-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.04] px-3 py-1.5 text-[13px] text-neutral-400"
