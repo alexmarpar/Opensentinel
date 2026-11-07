@@ -3,6 +3,7 @@ type AddDeviceBody = {
   host: string;
   port: number;
   username: string;
+  loginWithPassword: boolean;
 };
 
 async function PostDevice(device: AddDeviceBody) {

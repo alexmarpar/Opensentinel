@@ -1,13 +1,13 @@
 import { Elysia, t } from "elysia";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import parseSSHKey from "../services/ssh/parseSSHKey";
-import sanitizeName from "../services/ssh/sanitizeName";
-import listDirectories from "../tools/listDirectories";
+import parseSSHKey from "../../services/ssh/parseSSHKey";
+import sanitizeName from "../../services/ssh/sanitizeName";
+import listDirectories from "../../tools/listDirectories";
 import { rm, stat, rename } from 'node:fs/promises';
-import { PATHS } from "../services/storage/paths";
+import { PATHS } from "../../services/storage/paths";
 import { readFile } from "node:fs/promises"
-import { isPathSafe } from "../services/storage/pathValidation";
+import { isPathSafe } from "../../services/storage/pathValidation";
 
 export const ssh = new Elysia();
 
@@ -36,7 +36,7 @@ ssh.get("/ssh", async ( {query }) => {
 
 
 ssh.post("/ssh", async ({ body, set }) => {
-  const { name, host, port, username, password, privateKey, publicKey } = body;
+  const { name, host, port, username, password, loginWithPassword } = body;
   const safeName = sanitizeName(name);
   const dir = join(PATHS.sshDir, `${safeName}`);
   try {
@@ -47,15 +47,6 @@ ssh.post("/ssh", async ({ body, set }) => {
   }
   } catch {
   await mkdir(dir, { recursive: true });
-
-  if (privateKey) {
-    await writeFile(join(dir, parseSSHKey(privateKey).filename), privateKey, {
-      mode: 0o600
-    });
-  }
-
-  if (publicKey) {
-    await writeFile(join(dir, parseSSHKey(publicKey).filename), publicKey);
   }
 
   const configData = {
@@ -63,7 +54,7 @@ ssh.post("/ssh", async ({ body, set }) => {
     port: port,
     username: username,
     password: password,
-    filekeys: !!(privateKey && publicKey)
+    loginWithPassword: loginWithPassword
   }
   await writeFile(
       join(dir, "config.json"),
@@ -77,7 +68,7 @@ ssh.post("/ssh", async ({ body, set }) => {
     safeName,
     path: dir,
   };
-  }}, {
+  }, {
 
   body: t.Object({
     name: t.String(),
@@ -85,8 +76,7 @@ ssh.post("/ssh", async ({ body, set }) => {
     port: t.Number(),
     username: t.String(),
     password: t.Optional(t.String()),
-    privateKey: t.Optional(t.String()),
-    publicKey: t.Optional(t.String())
+    loginWithPassword: t.Boolean()
   })
  });
 

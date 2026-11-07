@@ -6,6 +6,7 @@ function AddDevice({ setOpenedAddDevice }: { setOpenedAddDevice: React.Dispatch<
   const [host, setHost] = useState("");
   const [port, setPort] = useState(22);
   const [username, setUsername] = useState("");
+  const [loginWithPassword, setLoginWithPassword] = useState(true);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -16,6 +17,7 @@ function AddDevice({ setOpenedAddDevice }: { setOpenedAddDevice: React.Dispatch<
         host,
         port,
         username,
+        loginWithPassword
       });
 
       setOpenedAddDevice(false);
@@ -77,6 +79,20 @@ function AddDevice({ setOpenedAddDevice }: { setOpenedAddDevice: React.Dispatch<
                     onChange={(e) => setUsername(e.target.value)}
                 />
             </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2">
+                  Login method
+              </label>
+
+              <select
+                  className="w-full px-3 py-2 rounded-lg border border-zinc-600 bg-zinc-700 text-white focus:outline-none focus:border-blue-500"
+                  value={loginWithPassword ? "password" : "ssh_keys"}
+                  onChange={(e) => setLoginWithPassword(e.target.value === "password")}
+              >
+                  <option value="password">Password</option>
+                  <option value="ssh_keys">SSH Keys</option>
+              </select>
+          </div>
             <div className="mt-6 flex justify-end gap-3">
             <button
                 type="button"
